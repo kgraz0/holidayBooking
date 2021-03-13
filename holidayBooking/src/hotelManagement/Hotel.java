@@ -1,6 +1,7 @@
-package holidayBooking;
+package hotelManagement;
+import java.util.ArrayList;
 
-public class Hotel extends Room {
+public class Hotel {
 	
 	String name;
 	String address;
@@ -114,5 +115,13 @@ public class Hotel extends Room {
 
 	public void setHasBreakfast(boolean hasBreakfast) {
 		this.hasBreakfast = hasBreakfast;
+	}
+
+	@Override
+	public String toString() {
+		return "Hotel [name=" + name + ", address=" + address + ", hasLinen=" + hasLinen + ", hasTowels=" + hasTowels
+				+ ", hasParking=" + hasParking + ", hasWifi=" + hasWifi + ", hasLockers=" + hasLockers + ", hasLaundry="
+				+ hasLaundry + ", has24hrReception=" + has24hrReception + ", hasHousekeeping=" + hasHousekeeping
+				+ ", hasBreakfast=" + hasBreakfast + "]";
 	}
 }
