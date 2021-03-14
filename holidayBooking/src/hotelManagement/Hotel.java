@@ -1,8 +1,13 @@
 package hotelManagement;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.io.*;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 
 public class Hotel {
 	
+	int id;
 	String name;
 	String address;
 	boolean hasLinen;
@@ -14,8 +19,10 @@ public class Hotel {
 	boolean has24hrReception;
 	boolean hasHousekeeping;
 	boolean hasBreakfast;
+	HashMap<Integer, Room> roomListHash = new HashMap<Integer, Room>();
 	
-	Hotel(String name, String address, boolean hasLinen, boolean hasTowels, boolean hasParking, boolean hasWifi, boolean hasLockers, boolean hasLaundry, boolean has24hrReception, boolean hasHousekeeping, boolean hasBreakfast) {
+	Hotel(int id, String name, String address, boolean hasLinen, boolean hasTowels, boolean hasParking, boolean hasWifi, boolean hasLockers, boolean hasLaundry, boolean has24hrReception, boolean hasHousekeeping, boolean hasBreakfast) {
+		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.hasLinen = hasLinen;
@@ -28,7 +35,32 @@ public class Hotel {
 		this.hasHousekeeping = hasHousekeeping;
 		this.hasBreakfast = hasBreakfast;
 	}
-
+	
+	public void addRoomList(String roomInfoDirectory) {
+		
+		try {
+			CSVReader reader = new CSVReader(new FileReader(roomInfoDirectory));
+			String[] nextLine;
+			
+			while ((nextLine = reader.readNext()) != null) {
+				roomListHash.put(Integer.parseInt(nextLine[0]), new Room(nextLine[1], Double.parseDouble(nextLine[2]), Boolean.parseBoolean(nextLine[3]), Boolean.parseBoolean(nextLine[4])));
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Invalid source directory.");
+		} catch (CsvValidationException e) {
+			System.out.println("Line is invalid.");
+		} catch (IOException e) {
+			System.out.println("Issue reading the file.");
+		}
+	}
+	
+	public void getRoomList() {
+		for (Map.Entry<Integer, Room> entry : roomListHash.entrySet()) {
+			System.out.println(entry);
+		}
+		//System.out.println(roomListHash);
+	}
+	
 	public String getName() {
 		return name;
 	}
