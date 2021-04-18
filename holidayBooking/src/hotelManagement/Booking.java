@@ -10,6 +10,7 @@ public class Booking {
 		this.personName = personName;
 		this.hotel = hotel;
 		this.room = room;
+		room.setReserved(true);
 	}
 
 	public String getPersonName() {
@@ -35,5 +36,9 @@ public class Booking {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Booking [personName=" + personName + "\n" + ", hotel=" + hotel + "\n" + ", room=" + room + "]";
+	}
 }

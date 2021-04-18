@@ -61,6 +61,10 @@ public class Hotel {
 		//System.out.println(roomListHash);
 	}
 	
+	public Room getSpecificRoom(int roomNum) {
+		return roomListHash.get(roomNum);
+	}
+	
 	public String getName() {
 		return name;
 	}
